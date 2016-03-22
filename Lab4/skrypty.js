@@ -1,6 +1,6 @@
 //chowanie tekstu
 $(document).ready(function(){
-    $("#1").click(function(){
+    $("#Schowaj").click(function(){
         $("#hide").toggle();
     });
 });
