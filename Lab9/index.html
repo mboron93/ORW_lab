@@ -1,0 +1,38 @@
+ <!DOCTYPE html>
+<html>
+<style>
+body{font:1em Arial;}
+ button{background:#fa4b2a; font:Arial; font-style:italic; color:#fff;}
+ output{background:#fa4b2a; font-size:1.5em; color:#fff;}
+</style>
+<body>
+
+<p>Liczby pierwsze: <output id="result"></output></p>
+<button onclick="startWorker()">Start Worker</button>
+<button onclick="stopWorker()">Stop Worker</button>
+<br><br>
+
+<script>
+var w;
+
+function startWorker() {
+    if(typeof(Worker) !== "undefined") {
+        if(typeof(w) == "undefined") {
+            w = new Worker("workers.js");
+        }
+        w.onmessage = function(event) {
+            document.getElementById("result").innerHTML = event.data;
+        };
+    } else {
+        document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
+    }
+}
+
+function stopWorker() {
+    w.terminate();
+    w = undefined;
+}
+</script>
+
+</body>
+</html>
